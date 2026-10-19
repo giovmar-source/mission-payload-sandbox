@@ -1,0 +1,136 @@
+{
+  "document": "MPS-TS-001",
+  "title": "Mission & Payload Sandbox: Technical Requirements Specification",
+  "standard": "ECSS-E-ST-10-06C (tailored)",
+  "methods": {
+    "T": "Test",
+    "A": "Analysis",
+    "R": "Review of design",
+    "I": "Inspection"
+  },
+  "requirements": [
+    {
+      "id": "SB-01",
+      "title": "First-order performance outputs",
+      "text": "The sandbox shall compute orbital period, ground speed, ground sampling distance, swath, revisit, signal-to-noise ratio, data volume and downlink capacity from declared input parameters.",
+      "rationale": "Core function: a mission and payload trade-off needs these quantities together.",
+      "need": "N1",
+      "methods": [
+        "T"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-02",
+      "title": "Agreement with published missions",
+      "text": "With the Sentinel-2, Landsat 8/9 and HiRISE presets, the computed orbital period, inclination, ground sampling distance and swath shall be within 5% of the published values.",
+      "rationale": "The model is only useful for trade-offs if it reproduces real missions.",
+      "need": "N2",
+      "methods": [
+        "T"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-03",
+      "title": "Visible formulas and assumptions",
+      "text": "Each displayed result shall be accompanied by its formula, its assumptions and its range of validity.",
+      "rationale": "Transparency: the user must be able to judge every number.",
+      "need": "N3",
+      "methods": [
+        "I"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-04",
+      "title": "Live requirement compliance matrix",
+      "text": "A compliance matrix of user-defined requirements shall be updated at every change of input, showing value, margin in per cent and status.",
+      "rationale": "Shows how a design change propagates to every requirement.",
+      "need": "N1",
+      "methods": [
+        "T",
+        "I"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-05",
+      "title": "Budgets with ESA margins",
+      "text": "Mass, power and data budgets shall apply the ESA margin policy: unit maturity margins of at least 5%, 10% or 20% (categories A/B, C, D) and a system margin of 20%.",
+      "rationale": "Margin philosophy for science assessment studies, ESA (issue 1.3).",
+      "need": "N4",
+      "methods": [
+        "T",
+        "R"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-06",
+      "title": "Celestial body switch",
+      "text": "Switching the central body between Earth and Mars shall update gravitational parameter, radius, J2, solar irradiance and distance from Earth.",
+      "rationale": "The same mission must be comparable around Earth and around Mars.",
+      "need": "N5",
+      "methods": [
+        "T"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-07",
+      "title": "Responsiveness without a server",
+      "text": "Every change of input shall be recomputed in the browser in less than 100 ms, without a server.",
+      "rationale": "Smooth interaction and zero running cost.",
+      "need": "N6",
+      "methods": [
+        "T"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-08",
+      "title": "Sharing and export",
+      "text": "A configuration shall be shareable through a link and exportable as JSON and as a PDF summary, with the interface in English and Italian.",
+      "rationale": "Use in applications and interviews.",
+      "need": "N6",
+      "methods": [
+        "I"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-09",
+      "title": "Payload families",
+      "text": "The user shall select the payload family (phase 1: multispectral imager and imaging spectrometer) and adjust its parameters, or start from a real preset.",
+      "rationale": "Designing an instrument, not only reading one.",
+      "need": "N1",
+      "methods": [
+        "T",
+        "I"
+      ],
+      "phase": 1,
+      "complete": false
+    },
+    {
+      "id": "SB-10",
+      "title": "Shared platform resources",
+      "text": "With two payloads on the same platform, power, memory and downlink shall be shared budgets, and the share of each payload shall be shown.",
+      "rationale": "Interfaces between subsystems are where design conflicts appear.",
+      "need": "N1",
+      "methods": [
+        "T"
+      ],
+      "phase": 2,
+      "complete": false
+    }
+  ]
+}
