@@ -28,7 +28,9 @@ Ultimo aggiornamento: **23 ottobre 2026**
 - [x] SRR: baseline funzionale (tag `srr`), 23 ott
 - [x] Moduli: radiometria e SNR, dati, collegamento
 - [x] Modulo budget con margini ESA (SB-05) e matrice di conformità (SB-04); SRR chiusa
-- [ ] Modulo spettrometro iperspettrale (SB-09), poi PDR
+- [x] Modulo spettrometro iperspettrale (SB-09), preset EnMAP (CR-004)
+- [ ] Interfaccia (pannelli, stato, link condivisibile, matrice di conformità), poi PDR
+- [ ] Fonte citabile dello spettro solare (per l'SNR di EnMAP)
 - [ ] Settimana 2: interfaccia completa, matrice di conformità, IT/EN
 - [x] Marte: grandezze giornaliere in sol (CR-003)
 
@@ -38,3 +40,4 @@ Ultimo aggiornamento: **23 ottobre 2026**
 | 19 ott 2026 | Avvio: ricerca di mercato, scheda di progetto, standard ECSS e modello a V, struttura del repository, primo modulo fisico con test e VCD |
 | 23 ott 2026 | Fase A chiusa (PRR): moduli radiometria, dati e collegamento con 8 nuovi test; validazione su Sentinel-2 (flusso dati −0,7%, SNR) e MRO (EIRP +0,25 dB, collegamento); SB-02 esteso (CR-002) |
 | 23 ott 2026 (sera) | Budget con i margini ESA (SB-05), matrice di conformità (SB-04), sol su Marte (CR-003); SRR chiusa con revisione del progetto su SB-05; 24 test |
+| 23 ott 2026 (sera, 2) | Spettrometro iperspettrale (SB-09) con preset EnMAP: GSD 30,02 m, swath 29,87 km, 244 canali contro 228 (+7%); 31 test |

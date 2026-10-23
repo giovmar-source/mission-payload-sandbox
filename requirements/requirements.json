@@ -24,7 +24,7 @@
     {
       "id": "SB-02",
       "title": "Agreement with published missions",
-      "text": "With the Sentinel-2, Landsat 8/9 and HiRISE/MRO presets, the computed orbital period, inclination, ground sampling distance, swath and uncompressed data rate shall be within 5% of the published values, and the transmitter EIRP within 1 dB.",
+      "text": "With the Sentinel-2, Landsat 8/9, EnMAP and HiRISE/MRO presets, the computed orbital period, inclination, ground sampling distance, swath and uncompressed data rate shall be within 5% of the published values, and the transmitter EIRP within 1 dB.",
       "rationale": "The model is only useful for trade-offs if it reproduces real missions.",
       "need": "N2",
       "methods": [

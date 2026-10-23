@@ -34,6 +34,8 @@ const MRO_TELECOM = 'https://gsaw.org/wp-content/uploads/2019/09/2006s10d_shamba
 const S2_PERF = 'https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-2-msi/mission-performance'
 const S2_EOPORTAL = 'https://www.eoportal.org/satellite-missions/copernicus-sentinel-2'
 const DSN_103 = 'https://deepspace.jpl.nasa.gov/dsndocs/810-005/103/103D.pdf'
+const ENMAP = 'https://www.enmap.org/mission/'
+const ENMAP_EOPORTAL = 'https://www.eoportal.org/satellite-missions/enmap'
 
 /** Sentinel-2 MSI bands: centre and width [nm], reference radiance Lref [W m⁻² sr⁻¹ µm⁻¹],
  *  required SNR at Lref, GSD [m]. Source: ESA, Sentinel-2 MSI mission performance. */
@@ -103,6 +105,38 @@ export const PRESETS: Preset[] = [
     derived: {},
   },
   {
+    id: 'enmap-hsi',
+    mission: 'EnMAP',
+    instrument: 'HSI',
+    body: 'earth',
+    family: 'hyperspectral',
+    altitudeKm: 653,
+    published: {
+      inclination: { value: 98, unit: 'deg', source: ENMAP_EOPORTAL },
+      gsd: { value: 30, unit: 'm', source: ENMAP },
+      swath: { value: 30, unit: 'km', source: ENMAP },
+      fieldOfView: { value: 2.62, unit: 'deg', source: ENMAP_EOPORTAL }, // ±1.31°
+      focalLength: { value: 0.522, unit: 'm', source: ENMAP_EOPORTAL },
+      fNumber: { value: 3, unit: '-', source: ENMAP_EOPORTAL },
+      pixelPitch: { value: 24, unit: 'µm', source: ENMAP_EOPORTAL },
+      vnirMinNm: { value: 420, unit: 'nm', source: ENMAP },
+      vnirMaxNm: { value: 1000, unit: 'nm', source: ENMAP },
+      vnirSamplingNm: { value: 6.5, unit: 'nm', source: ENMAP_EOPORTAL },
+      swirMinNm: { value: 900, unit: 'nm', source: ENMAP },
+      swirMaxNm: { value: 2450, unit: 'nm', source: ENMAP },
+      swirSamplingNm: { value: 10, unit: 'nm', source: ENMAP_EOPORTAL },
+      bands: { value: 228, unit: '-', source: ENMAP_EOPORTAL },
+      snrVnir495: { value: 500, unit: '-', source: ENMAP_EOPORTAL },
+      snrSwir2200: { value: 175, unit: '-', source: ENMAP_EOPORTAL },
+      quantisation: { value: 14, unit: 'bit', source: ENMAP_EOPORTAL },
+      downlinkRate: { value: 320, unit: 'Mbit/s', source: ENMAP_EOPORTAL },
+      onboardMemory: { value: 512, unit: 'Gbit', source: ENMAP_EOPORTAL },
+    },
+    derived: {
+      aperture: { value: 0.174, unit: 'm', source: ENMAP_EOPORTAL, from: 'focal length 0.522 m / f/3' },
+    },
+  },
+  {
     id: 'mro-hirise',
     mission: 'Mars Reconnaissance Orbiter',
     instrument: 'HiRISE',
@@ -139,4 +173,8 @@ export function preset(id: string): Preset {
   const found = PRESETS.find((p) => p.id === id)
   if (!found) throw new Error(`Unknown preset: ${id}`)
   return found
+}
+
+export function presetsByFamily(family: Preset['family']): Preset[] {
+  return PRESETS.filter((p) => p.family === family)
 }

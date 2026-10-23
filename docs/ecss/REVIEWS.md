@@ -58,3 +58,5 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 
 - **Exit criteria:** architecture of the interface (panels, state, sharing); ICD complete for
   SB-09; interface prototype covering SB-03 and SB-04; baseline tagged `pdr`.
+- **Progress:** SB-09 core done on 23 Oct 2026 (spectrometer module, EnMAP preset, 7 tests;
+  CR-004). Remaining: interface architecture and prototype.

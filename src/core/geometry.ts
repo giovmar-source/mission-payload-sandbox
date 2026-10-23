@@ -25,3 +25,8 @@ export function swathFromPixels(pixelsAcross: number, gsdM: number): number {
 export function lineTime(gsdM: number, groundSpeedKmS: number): number {
   return (gsdM / (groundSpeedKmS * 1e3)) * 1e6
 }
+
+/** Swath width [km] from the full across-track field of view [deg], flat-surface approximation */
+export function swathFromFov(altitudeKm: number, fullFovDeg: number): number {
+  return 2 * altitudeKm * Math.tan(((fullFovDeg / 2) * Math.PI) / 180)
+}

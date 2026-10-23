@@ -40,9 +40,13 @@ Tailored from **ECSS-E-ST-10-24C Rev.1** (Interface management, 15 November 2024
 | RAM used and capacity, processor peak load | UI → core | MB, MB, 0–1 | > 0 | `budgets.ts` |
 | RAM margin, processor compliance, mass memory fill | core → UI | –, boolean, 0–1 | – | `budgets.ts` |
 | User requirements: quantity, max or min, limit, unit | UI → core | – | – | `compliance.ts` |
+| Payload family, preset | UI → core | `multispectral` \| `hyperspectral`, preset id | – | `presets.ts` |
+| Spectral ranges: min, max, average sampling | UI → core | nm | min < max, sampling > 0 | `spectrometer.ts` |
+| Channels: centre, width; channel count; SNR scaling with sampling | core → UI | nm, –, – | – | `spectrometer.ts` |
+| Field of view (full, across track) | UI → core | deg | > 0 | `geometry.ts` |
 | Compliance rows: value, margin, status | core → UI | –, –, `compliant` \| `marginal` \| `non-compliant` | – | `compliance.ts` |
 
 ## 3. Open items for PDR
 
 - Valid altitude range per body (atmospheric drag on Earth below about 300 km).
-- Imaging spectrometer data items (SB-09), added with its module.
+- Interface state, sharing link and export formats (SB-08).

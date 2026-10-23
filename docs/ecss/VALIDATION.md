@@ -1,6 +1,6 @@
 # Validation note
 
-Document MPS-VAL-001 · Issue 2 · 23 October 2026 · Author: Giovanni Marino
+Document MPS-VAL-001 · Issue 3 · 23 October 2026 · Author: Giovanni Marino
 
 The model is compared with published values of real missions. Only values stated on the
 cited pages are used; values derived from them are marked as derived.
@@ -20,6 +20,10 @@ cited pages are used; values derived from them are marked as derived.
 | Sentinel-2 | Uncompressed data rate, 13 bands, 12 bit | 1.3 Gbit/s | 1.29 Gbit/s | −0.7% | [eoPortal](https://www.eoportal.org/satellite-missions/copernicus-sentinel-2) |
 | MRO | X-band EIRP (100 W, 3 m antenna, 8.41 GHz) | 95.6 dBm | 95.85 dBm | +0.25 dB | [Shambayati 2006](https://gsaw.org/wp-content/uploads/2019/09/2006s10d_shambayati.pdf) |
 | MRO | Downlink at maximum Earth–Mars distance, 34 m antenna | 0.6 Mbps | 1.17 Mbps | factor 1.95 | [arXiv 2211.14245](https://arxiv.org/pdf/2211.14245) |
+| EnMAP | GSD from focal length 522 mm and 24 µm pixels at 653 km | 30 m | 30.02 m | +0.08% | [eoPortal EnMAP](https://www.eoportal.org/satellite-missions/enmap), [EnMAP mission](https://www.enmap.org/mission/) |
+| EnMAP | Swath from ±1.31° field of view | 30 km | 29.87 km | −0.4% | eoPortal EnMAP, EnMAP mission |
+| EnMAP | Sun-synchronous inclination at 653 km | 98° | 98.00° | 0% | eoPortal EnMAP |
+| EnMAP | Spectral channels from average sampling (VNIR 6.5 nm, SWIR 10 nm) | 228 | 89 + 155 = 244 | +7% | eoPortal EnMAP |
 | MRO | Downlink at minimum distance | 2.6 Mbps (34 m), 6 Mbps maximum | 6 Mbps, limited by the radio | radio-limited | arXiv 2211.14245, Shambayati 2006 |
 
 Derived HiRISE values: focal length 12 m (aperture 0.5 m × f/24) and pixel pitch 12 µm
@@ -64,6 +68,18 @@ assumed antenna efficiency 0.55, required Eb/N0 1 dB (turbo code), margin 3 dB, 
 Near Mars the physics would allow about 63 Mbps, but the radio limit of 6 Mbps applies: this
 is why MRO's real rates change by about 4 times while free-space loss changes by 54 times.
 
+## EnMAP notes
+
+- **Channel count.** The estimate uses the average sampling; real sampling varies across the
+  detector (VNIR 4.8–8.2 nm, SWIR −25% to +20% around 10 nm), so +7% is expected from the
+  model, not a fault of it. The test accepts 10%.
+- **Data rate.** The 2 × 840 Mbit/s quoted for the instrument-to-memory interface is a link
+  capacity, not the generated data rate, so it is not used for validation.
+- **SNR.** The specification (500 at 495 nm, 175 at 2200 nm; one section of the same source
+  gives 150) is set at 30% reflectance and 30° solar zenith angle. Checking it needs the solar
+  spectral irradiance at those wavelengths from a citable source: open item.
+
 ## Open items
 
 - Landsat 8 OLI SNR: the published table is not in an openly readable source.
+- EnMAP SNR: needs a citable solar spectral irradiance reference.
