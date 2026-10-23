@@ -18,21 +18,23 @@ Ultimo aggiornamento: **23 ottobre 2026**
 | 19 ott | Licenza MIT; documenti in inglese, dialogo in italiano |
 
 ## 3. Stato
-- Fase 0 (MDR) e fase A (PRR) chiuse. Prossima revisione: SRR.
+- MDR, PRR e SRR chiuse (baseline funzionale `srr`, 23 ott). Prossima revisione: PDR.
 - Fatto: nucleo orbita (Terra, Marte), geometria (GSD, swath, tempo di riga), preset con fonti,
   moduli di radiometria/SNR, dati e collegamento (23 ott), 15 test, VCD generato dai test, TS, VP, ICD (bozza), revisioni, configurazione, nota di validazione,
   pagina di anteprima.
 
 ## 4. Da fare (prossimi passi)
 - [x] PRR (23 ott): SNR di MSI, collegamento di MRO; aperto: tabella SNR di OLI non leggibile da fonti aperte
-- [ ] SRR: baseline della TS (tag `srr`)
+- [x] SRR: baseline funzionale (tag `srr`), 23 ott
 - [x] Moduli: radiometria e SNR, dati, collegamento
-- [ ] Modulo budget con margini ESA (SB-05), poi SRR
+- [x] Modulo budget con margini ESA (SB-05) e matrice di conformità (SB-04); SRR chiusa
+- [ ] Modulo spettrometro iperspettrale (SB-09), poi PDR
 - [ ] Settimana 2: interfaccia completa, matrice di conformità, IT/EN
-- [ ] Marte: rivisita in sol (oggi i «giorni» sono di 86 400 s anche su Marte)
+- [x] Marte: grandezze giornaliere in sol (CR-003)
 
 ## 5. Cronologia
 | Data | Cosa |
 | --- | --- |
 | 19 ott 2026 | Avvio: ricerca di mercato, scheda di progetto, standard ECSS e modello a V, struttura del repository, primo modulo fisico con test e VCD |
 | 23 ott 2026 | Fase A chiusa (PRR): moduli radiometria, dati e collegamento con 8 nuovi test; validazione su Sentinel-2 (flusso dati −0,7%, SNR) e MRO (EIRP +0,25 dB, collegamento); SB-02 esteso (CR-002) |
+| 23 ott 2026 (sera) | Budget con i margini ESA (SB-05), matrice di conformità (SB-04), sol su Marte (CR-003); SRR chiusa con revisione del progetto su SB-05; 24 test |

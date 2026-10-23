@@ -31,9 +31,9 @@ export function groundSpeed(body: Body, altitudeKm: number): number {
   return (body.equatorialRadius / a) * orbitalSpeed(body, altitudeKm)
 }
 
-/** Orbits per (solar) day of 86 400 s, n = 86 400 / T */
+/** Orbits per solar day of the body (a sol on Mars), n = day / T */
 export function orbitsPerDay(body: Body, altitudeKm: number): number {
-  return 86400 / orbitalPeriod(body, altitudeKm)
+  return body.solarDay / orbitalPeriod(body, altitudeKm)
 }
 
 /**
@@ -51,7 +51,8 @@ export function sunSynchronousInclination(body: Body, altitudeKm: number): numbe
 }
 
 /**
- * Days needed to cover the whole equator once, t ≈ 2πR / (n · swath · S).
+ * Solar days of the body (sols on Mars) needed to cover the whole equator once,
+ * t ≈ 2πR / (n · swath · S).
  * This is an equatorial coverage estimate, not the exact repeat cycle of the ground track:
  * the interface shows both and explains the difference.
  */

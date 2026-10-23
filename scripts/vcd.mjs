@@ -10,6 +10,7 @@
 //
 // A requirement is Closed only when its register entry says `complete: true` (all its parts
 // implemented and tested); before that, passing tests give "Partially verified".
+// Methods other than T (A, R, I) are closed by a review record named in `closedBy`.
 
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -44,7 +45,9 @@ const rows = register.requirements.map((r) => {
   const linked = byReq.get(r.id) || []
   const failed = linked.filter((t) => t.status !== 'passed')
   const needsTest = r.methods.includes('T')
-  const otherMethods = r.methods.filter((m) => m !== 'T')
+  const closedBy = r.closedBy || {}
+  const otherMethods = r.methods.filter((m) => m !== 'T' && !closedBy[m])
+  const closedNote = Object.entries(closedBy).map(([m, by]) => `${m} closed at ${by}`).join('; ')
   let status
   if (failed.length) status = `Failed (${failed.length})`
   else if (needsTest && linked.length === 0) status = r.phase > 1 ? 'Open (phase 2)' : 'Open'
@@ -53,7 +56,8 @@ const rows = register.requirements.map((r) => {
   const evidence = linked.length
     ? linked.map((t) => `${t.status === 'passed' ? '✔' : '✘'} ${esc(t.name.replace(/^\[SB-\d{2}\]\s*/, ''))}`).join('<br>')
     : '–'
-  return `| ${r.id} | ${esc(r.title)} | ${r.methods.join(', ')} | ${evidence} | ${status} |`
+  const evidenceAll = closedNote ? (linked.length ? `${evidence}<br>${esc(closedNote)}` : esc(closedNote)) : evidence
+  return `| ${r.id} | ${esc(r.title)} | ${r.methods.join(', ')} | ${evidenceAll} | ${status} |`
 })
 
 const passed = tests.filter((t) => t.status === 'passed').length

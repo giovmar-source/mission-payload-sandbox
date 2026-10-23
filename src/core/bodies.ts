@@ -22,6 +22,10 @@ export interface Body {
   j2: number
   /** Sidereal rotation period [s] */
   siderealDay: number
+  /** Length of the solar day [s] (a sol on Mars): unit of "days" for that body */
+  solarDay: number
+  /** Name of the solar day in the interface */
+  dayName: string
   /** Tropical orbit period around the Sun [s]: sets the sun-synchronous precession rate */
   tropicalYear: number
   /** Mean solar irradiance at the body's distance from the Sun [W/m^2] */
@@ -43,6 +47,8 @@ export const BODIES: Record<BodyId, Body> = {
     meanRadius: 6371.0,
     j2: 1082.63e-6,
     siderealDay: 23.9345 * HOUR,
+    solarDay: 24.0 * HOUR,
+    dayName: 'day',
     tropicalYear: 365.242 * DAY,
     solarIrradiance: 1361.0,
     distanceFromEarth: { min: 0, max: 0 },
@@ -56,6 +62,8 @@ export const BODIES: Record<BodyId, Body> = {
     meanRadius: 3389.5,
     j2: 1960.45e-6,
     siderealDay: 24.6229 * HOUR,
+    solarDay: 24.6597 * HOUR,
+    dayName: 'sol',
     tropicalYear: 686.972 * DAY,
     solarIrradiance: 586.2,
     distanceFromEarth: { min: 54.6e6, max: 401.4e6 },

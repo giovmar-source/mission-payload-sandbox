@@ -22,7 +22,7 @@ not a design or qualification tool.
 | [AD3] | ECSS-E-ST-10-24C Rev.1, Interface management (15 November 2024) |
 | [AD4] | ECSS-M-ST-10C, Project planning and implementation (31 July 2008) |
 | [AD5] | ECSS-M-ST-40C Rev.1, Configuration and information management (6 March 2009) |
-| [RD1] | ESA, Margin philosophy for science assessment studies, issue 1.3 |
+| [RD1] | ESA, Margin philosophy for science assessment studies, SRE-PA/2011.097, issue 1 rev. 3 (15 June 2012) |
 | [RD2] | NASA NSSDCA Earth and Mars fact sheets |
 | [RD3] | Reference mission pages listed in [Validation note](VALIDATION.md) |
 
@@ -51,7 +51,7 @@ specification and the Verification Control Document cannot drift apart.
 | SB-02 | With the Sentinel-2, Landsat 8/9 and HiRISE/MRO presets, the computed orbital period, inclination, ground sampling distance, swath and uncompressed data rate shall be within 5% of the published values, and the transmitter EIRP within 1 dB. | The model is only useful for trade-offs if it reproduces real missions. | T | 1 |
 | SB-03 | Each displayed result shall be accompanied by its formula, its assumptions and its range of validity. | Transparency: the user must be able to judge every number. | I | 1 |
 | SB-04 | A compliance matrix of user-defined requirements shall be updated at every change of input, showing value, margin in per cent and status. | Shows how a design change propagates to every requirement. | T, I | 1 |
-| SB-05 | Mass, power and data budgets shall apply the ESA margin policy: unit maturity margins of at least 5%, 10% or 20% (categories A/B, C, D) and a system margin of 20%. | Margin philosophy for science assessment studies, ESA (issue 1.3). | T, R | 1 |
+| SB-05 | Mass, power and data budgets shall apply the ESA margin policy: unit maturity margins of at least 5%, 10% or 20% (categories A/B, C, D) and a system margin of 20%. | ESA, Margin philosophy for science assessment studies (SRE-PA/2011.097, issue 1 rev. 3, 15 June 2012). | T, R | 1 |
 | SB-06 | Switching the central body between Earth and Mars shall update gravitational parameter, radius, J2, solar irradiance and distance from Earth. | The same mission must be comparable around Earth and around Mars. | T | 1 |
 | SB-07 | Every change of input shall be recomputed in the browser in less than 100 ms, without a server. | Smooth interaction and zero running cost. | T | 1 |
 | SB-08 | A configuration shall be shareable through a link and exportable as JSON and as a PDF summary, with the interface in English and Italian. | Use in applications and interviews. | I | 1 |

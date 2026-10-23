@@ -62,14 +62,17 @@
       "id": "SB-05",
       "title": "Budgets with ESA margins",
       "text": "Mass, power and data budgets shall apply the ESA margin policy: unit maturity margins of at least 5%, 10% or 20% (categories A/B, C, D) and a system margin of 20%.",
-      "rationale": "Margin philosophy for science assessment studies, ESA (issue 1.3).",
+      "rationale": "ESA, Margin philosophy for science assessment studies (SRE-PA/2011.097, issue 1 rev. 3, 15 June 2012).",
       "need": "N4",
       "methods": [
         "T",
         "R"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true,
+      "closedBy": {
+        "R": "SRR, 23 Oct 2026 (docs/ecss/REVIEWS.md)"
+      }
     },
     {
       "id": "SB-06",

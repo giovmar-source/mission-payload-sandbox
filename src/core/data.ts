@@ -24,9 +24,9 @@ export function compressedRate(rawBps: number, compressionRatio: number): number
   return rawBps / compressionRatio
 }
 
-/** Volume per day [bit] for a given imaging duty cycle [0–1] */
-export function dailyVolume(rateBps: number, dutyCycle: number): number {
-  return rateBps * 86400 * dutyCycle
+/** Volume per day [bit] for a given imaging duty cycle [0–1]; pass body.solarDay for a sol */
+export function dailyVolume(rateBps: number, dutyCycle: number, daySeconds = 86400): number {
+  return rateBps * daySeconds * dutyCycle
 }
 
 /** Time to downlink a volume [s] at a given link rate [bit/s] */
