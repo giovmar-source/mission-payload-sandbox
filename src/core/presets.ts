@@ -35,6 +35,8 @@ const S2_PERF = 'https://sentinel.esa.int/web/sentinel/technical-guides/sentinel
 const S2_EOPORTAL = 'https://www.eoportal.org/satellite-missions/copernicus-sentinel-2'
 const DSN_103 = 'https://deepspace.jpl.nasa.gov/dsndocs/810-005/103/103D.pdf'
 const ENMAP = 'https://www.enmap.org/mission/'
+const HIRISE_TDI = 'https://pds.nasa.gov/datastandards/documents/dd/current/PDS4_PDS_DD_1M00/webhelp/all/ch47s198.html'
+const HIRISE_COSPAR = 'https://meetings.copernicus.org/www.cosis.net/abstracts/COSPAR2006/01096/COSPAR2006-A-01096.pdf'
 const ENMAP_EOPORTAL = 'https://www.eoportal.org/satellite-missions/enmap'
 
 /** Sentinel-2 MSI bands: centre and width [nm], reference radiance Lref [W m⁻² sr⁻¹ µm⁻¹],
@@ -152,6 +154,10 @@ export const PRESETS: Preset[] = [
       swathRedMin: { value: 6, unit: 'km', source: HIRISE },
       storage: { value: 28, unit: 'Gbit', source: HIRISE },
       lineTimeMin: { value: 76, unit: 'µs', source: HIRISE },
+      readNoiseMax: { value: 50, unit: 'e⁻ rms (< 50 at 22 °C)', source: HIRISE },
+      tdiMax: { value: 128, unit: 'stages (options 8, 32, 64, 128)', source: HIRISE_TDI },
+      pspDataReturn: { value: 18, unit: 'Tbit (~, expected)', source: HIRISE_COSPAR },
+      pspDurationYears: { value: 2, unit: 'years', source: HIRISE_COSPAR },
       highGainAntenna: { value: 3, unit: 'm', source: MRO_COMMS },
       transmitterPower: { value: 100, unit: 'W', source: MRO_COMMS },
       downlinkFar34m: { value: 0.6, unit: 'Mbps', source: MRO_COMMS },

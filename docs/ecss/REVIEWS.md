@@ -1,6 +1,6 @@
 # Life cycle and reviews
 
-Document MPS-REV-001 · Issue 2 · 23 October 2026 · Author: Giovanni Marino
+Document MPS-REV-001 · Issue 3 · 23 October 2026 · Author: Giovanni Marino
 
 Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation, 31 July
 2008), scaled to a personal project.
@@ -9,7 +9,7 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 | --- | --- | --- | --- | --- |
 | 0 | Mission analysis and needs identification | MDR | Project brief, stakeholder needs (TS §3) | Done, 19 Oct 2026 |
 | A | Feasibility | PRR | Published parameters checked; no equivalent web tool found | Done, 23 Oct 2026 |
-| B | Preliminary definition | SRR, PDR | TS baseline (SRR); architecture and ICD (PDR) | SRR done 23 Oct 2026; PDR planned |
+| B | Preliminary definition | SRR, PDR | TS baseline (SRR); architecture and ICD (PDR) | Done, 23 Oct 2026 |
 | C | Detailed definition | CDR | Formulas and interfaces of every module | Planned, weeks 1–2 |
 | D | Qualification and production | QR, AR, ORR | Implementation, complete VCD (QR), final check before release (AR) | Planned, weeks 2–4 |
 | E | Operations and utilisation | FRR, LRR, CRR, ELR | Public release, issue handling, later versions | After release |
@@ -54,9 +54,19 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 - **Outcome:** passed. Open items: OLI SNR source (from PRR); imaging spectrometer module
   (SB-09) for PDR.
 
-### PDR · Preliminary design review · open
+### PDR · Preliminary design review · 23 October 2026
 
 - **Exit criteria:** architecture of the interface (panels, state, sharing); ICD complete for
   SB-09; interface prototype covering SB-03 and SB-04; baseline tagged `pdr`.
-- **Progress:** SB-09 core done on 23 Oct 2026 (spectrometer module, EnMAP preset, 7 tests;
-  CR-004). Remaining: interface architecture and prototype.
+- **Evidence:** interface with Mission, Payload, Link and storage, Budgets panels; live
+  compliance matrix; results with formula and assumptions; English and Italian; share link and
+  JSON export; ICD issue 2 with the design/evaluate architecture; 42 tests passing; checked in
+  a headless browser for Sentinel-2, EnMAP (Italian) and HiRISE, desktop and phone width, no
+  console errors.
+- **Inspection (I):** SB-03 every result shows formula, assumptions and validity behind the ƒ
+  button; SB-04 the matrix updates on every input change, with editable limits; SB-09 the family
+  switch and the EnMAP and Sentinel-2 presets work. **Closed.**
+- **Findings:** HiRISE SNR of 8 not credible → CR-005 (TDI read noise) and CR-006 (published
+  TDI and derived duty cycle); derived values shown as assumptions → new «derived» marking.
+- **Outcome:** passed. Open items for CDR: PDF summary (SB-08), altitude validity warning,
+  OLI and EnMAP SNR sources.

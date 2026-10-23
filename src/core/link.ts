@@ -75,3 +75,14 @@ export function linkBudget(i: LinkInput): LinkResult {
     limitedBy: physicsRateBps > cap ? 'radio' : 'link',
   }
 }
+
+/**
+ * Slant range [km] from a ground station to a satellite at altitude h seen at elevation e
+ * above the horizon (spherical body):
+ *   d = √((R + h)² − R² cos² e) − R sin e
+ */
+export function slantRange(radiusKm: number, altitudeKm: number, elevationDeg: number): number {
+  const e = (elevationDeg * Math.PI) / 180
+  const r = radiusKm + altitudeKm
+  return Math.sqrt(r ** 2 - (radiusKm * Math.cos(e)) ** 2) - radiusKm * Math.sin(e)
+}

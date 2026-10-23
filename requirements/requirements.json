@@ -43,7 +43,10 @@
         "I"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true,
+      "closedBy": {
+        "I": "PDR, 23 Oct 2026 (docs/ecss/REVIEWS.md)"
+      }
     },
     {
       "id": "SB-04",
@@ -56,7 +59,10 @@
         "I"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true,
+      "closedBy": {
+        "I": "PDR, 23 Oct 2026 (docs/ecss/REVIEWS.md)"
+      }
     },
     {
       "id": "SB-05",
@@ -96,7 +102,7 @@
         "T"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true
     },
     {
       "id": "SB-08",
@@ -121,7 +127,10 @@
         "I"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true,
+      "closedBy": {
+        "I": "PDR, 23 Oct 2026 (docs/ecss/REVIEWS.md)"
+      }
     },
     {
       "id": "SB-10",

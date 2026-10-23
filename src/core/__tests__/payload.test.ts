@@ -31,9 +31,10 @@ describe('radiometry', () => {
     }
   })
 
-  it('[SB-01] read noise and dark signal lower the SNR; TDI raises it', () => {
+  it('[SB-01] read noise and dark signal lower the SNR; CCD TDI raises it (read noise counted once)', () => {
     expect(snr(10000, 50, 100)).toBeLessThan(snr(10000))
-    expect(snr(4 * 10000, 50, 0, 4)).toBeGreaterThan(snr(10000, 50))
+    expect(snr(4 * 10000, 50)).toBeGreaterThan(snr(10000, 50))
+    expect(snr(1e4, 50)).toBeCloseTo(1e4 / Math.sqrt(1e4 + 2500), 9)
   })
 
   it('[SB-06] the same scene around Mars has 43% of the Earth radiance (586.2 / 1361 W/m²)', () => {

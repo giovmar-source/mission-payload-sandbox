@@ -1,6 +1,6 @@
 # Interface Control Document (ICD): physics core ↔ user interface
 
-Document MPS-ICD-001 · Issue 1 (SRR baseline) · 23 October 2026 · Author: Giovanni Marino
+Document MPS-ICD-001 · Issue 2 (PDR baseline) · 23 October 2026 · Author: Giovanni Marino
 
 Tailored from **ECSS-E-ST-10-24C Rev.1** (Interface management, 15 November 2024), Annex B.
 
@@ -11,13 +11,22 @@ Tailored from **ECSS-E-ST-10-24C Rev.1** (Interface management, 15 November 2024
 | Provider | Physics core, `src/core/` | Pure TypeScript functions, no UI dependency |
 | User | Interface, `src/ui/` | Collects inputs, displays outputs, formulas and assumptions |
 
-## 2. Data items (current baseline)
+## 2. Architecture
+
+The interface holds one `Design` object (`src/core/design.ts`) with every input. A pure
+function `evaluate(design)` returns every output (`Results`), so the interface never computes
+physics itself, and every result shown is covered by the core tests. The design is encoded in
+the URL fragment (`src/core/share.ts`), which makes every configuration a shareable link
+without a server. Fields that are assumptions or derived values are listed in the design and
+marked in the interface.
+
+## 3. Data items
 
 | Item | Direction | Unit | Valid range | Defined in |
 | --- | --- | --- | --- | --- |
 | Central body | UI → core | `earth` \| `mars` | – | `bodies.ts` |
 | Solar day of the body (day or sol) | core → UI | s, name | – | `bodies.ts` |
-| Altitude | UI → core | km | 200–2000 (to be confirmed at PDR) | `orbit.ts` |
+| Altitude | UI → core | km | 200–1500 in the interface | `orbit.ts` |
 | Pixel pitch | UI → core | µm | > 0 | `geometry.ts` |
 | Focal length | UI → core | m | > 0 | `geometry.ts` |
 | Pixels across track | UI → core | px | > 0 | `geometry.ts` |
@@ -44,9 +53,13 @@ Tailored from **ECSS-E-ST-10-24C Rev.1** (Interface management, 15 November 2024
 | Spectral ranges: min, max, average sampling | UI → core | nm | min < max, sampling > 0 | `spectrometer.ts` |
 | Channels: centre, width; channel count; SNR scaling with sampling | core → UI | nm, –, – | – | `spectrometer.ts` |
 | Field of view (full, across track) | UI → core | deg | > 0 | `geometry.ts` |
+| Design (all inputs), assumptions and derived field lists | UI → core | `Design` | version 1 | `design.ts` |
+| Results (all outputs) | core → UI | `Results` | – | `design.ts` |
+| Share code | UI ↔ URL | base64url of the design JSON | invalid codes rejected | `share.ts` |
 | Compliance rows: value, margin, status | core → UI | –, –, `compliant` \| `marginal` \| `non-compliant` | – | `compliance.ts` |
 
-## 3. Open items for PDR
+## 4. Open items for CDR
 
-- Valid altitude range per body (atmospheric drag on Earth below about 300 km).
-- Interface state, sharing link and export formats (SB-08).
+- Valid altitude range per body (atmospheric drag on Earth below about 300 km): the interface
+  allows 200–1500 km and does not warn yet.
+- PDF summary export (SB-08).

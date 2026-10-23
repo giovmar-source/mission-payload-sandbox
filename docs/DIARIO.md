@@ -18,7 +18,7 @@ Ultimo aggiornamento: **23 ottobre 2026**
 | 19 ott | Licenza MIT; documenti in inglese, dialogo in italiano |
 
 ## 3. Stato
-- MDR, PRR e SRR chiuse (baseline funzionale `srr`, 23 ott). Prossima revisione: PDR.
+- MDR, PRR, SRR e PDR chiuse (baseline `srr` e `pdr`, 23 ott). Prossima revisione: CDR.
 - Fatto: nucleo orbita (Terra, Marte), geometria (GSD, swath, tempo di riga), preset con fonti,
   moduli di radiometria/SNR, dati e collegamento (23 ott), 15 test, VCD generato dai test, TS, VP, ICD (bozza), revisioni, configurazione, nota di validazione,
   pagina di anteprima.
@@ -29,7 +29,9 @@ Ultimo aggiornamento: **23 ottobre 2026**
 - [x] Moduli: radiometria e SNR, dati, collegamento
 - [x] Modulo budget con margini ESA (SB-05) e matrice di conformità (SB-04); SRR chiusa
 - [x] Modulo spettrometro iperspettrale (SB-09), preset EnMAP (CR-004)
-- [ ] Interfaccia (pannelli, stato, link condivisibile, matrice di conformità), poi PDR
+- [x] Interfaccia (pannelli, matrice di conformità, formule, IT/EN, link, JSON): PDR chiusa
+- [ ] Pubblicazione su Cloudflare Pages
+- [ ] CDR: esportazione PDF (SB-08), avviso sulla quota valida, curve di trade-off
 - [ ] Fonte citabile dello spettro solare (per l'SNR di EnMAP)
 - [ ] Settimana 2: interfaccia completa, matrice di conformità, IT/EN
 - [x] Marte: grandezze giornaliere in sol (CR-003)
@@ -41,3 +43,4 @@ Ultimo aggiornamento: **23 ottobre 2026**
 | 23 ott 2026 | Fase A chiusa (PRR): moduli radiometria, dati e collegamento con 8 nuovi test; validazione su Sentinel-2 (flusso dati −0,7%, SNR) e MRO (EIRP +0,25 dB, collegamento); SB-02 esteso (CR-002) |
 | 23 ott 2026 (sera) | Budget con i margini ESA (SB-05), matrice di conformità (SB-04), sol su Marte (CR-003); SRR chiusa con revisione del progetto su SB-05; 24 test |
 | 23 ott 2026 (sera, 2) | Spettrometro iperspettrale (SB-09) con preset EnMAP: GSD 30,02 m, swath 29,87 km, 244 canali contro 228 (+7%); 31 test |
+| 23 ott 2026 (notte) | Interfaccia completa e PDR chiusa: motore design/evaluate, link condivisibile, IT/EN, valori ricavati distinti dalle ipotesi; CR-005 (rumore TDI) e CR-006 (HiRISE: TDI 128, frazione di acquisizione da 18 Tbit); 42 test |

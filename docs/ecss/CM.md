@@ -18,7 +18,8 @@ Tailored from **ECSS-M-ST-40C Rev.1** (Configuration and information management,
 | Baseline | Content | Review | Tag |
 | --- | --- | --- | --- |
 | Functional | TS issue 1, ICD issue 1 | SRR, 23 Oct 2026 | `srr` |
-| Design | TS + ICD + module formulas | PDR / CDR | `pdr`, `cdr` |
+| Design | TS + ICD issue 2 + interface architecture | PDR, 23 Oct 2026 | `pdr` |
+| Detailed design | Module formulas and interfaces complete | CDR | `cdr` |
 | Product | Verified version 1 | QR / AR | `v1.0.0` |
 
 ## Change records
@@ -29,3 +30,5 @@ Tailored from **ECSS-M-ST-40C Rev.1** (Configuration and information management,
 | CR-002 | 23 Oct 2026 | SB-02 extended to uncompressed data rate (5%) and transmitter EIRP (1 dB) | New published reference values found at PRR (Sentinel-2 MSI data rate, MRO X-band EIRP) | Requirement register, TS table, VCD regenerated; no code impact | Closed |
 | CR-003 | 23 Oct 2026 | Daily quantities expressed in the body's solar day (24.6597 h sol on Mars) | PRR open item 2 | `bodies.ts`, `orbit.ts`, `data.ts`; Earth results unchanged (tested) | Closed |
 | CR-004 | 23 Oct 2026 | EnMAP added as hyperspectral reference preset; SB-02 now names EnMAP | SB-09 needs a validated hyperspectral reference | Requirement register, presets, ICD, validation note; functional baseline `srr` superseded at PDR | Closed |
+| CR-005 | 23 Oct 2026 | Read noise counted once in CCD TDI (was once per stage) | Found during PDR browser check: HiRISE SNR of 8 was not credible; CCD TDI adds charge in the charge domain and reads once | `radiometry.ts`, `design.ts`; Sentinel-2 SNR validation unchanged (shot noise only); tests updated | Closed |
+| CR-006 | 23 Oct 2026 | HiRISE preset: TDI 128 (published options 8, 32, 64, 128), read noise < 50 e⁻, duty cycle derived from ~18 Tbit over the 2-year primary science phase | Replaced two unsupported assumptions (TDI 1, duty cycle 1%) with published or derived values | `presets.ts`, `design.ts`; new test | Closed |

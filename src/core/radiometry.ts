@@ -4,8 +4,9 @@
  * Signal electrons collected by one pixel during one line time:
  *   P  = L · Δλ · A_ap · Ω_pix          (W)   with Ω_pix = (GSD / h)², A_ap = π D² / 4
  *   Ne = P · t · λ / (h c) · τ · η · N_TDI
- * Noise: shot noise, read noise (once per TDI stage) and dark signal:
- *   SNR = Ne / √(Ne + N_TDI · σ_read² + N_dark)
+ * Noise: shot noise, read noise and dark signal. In a CCD the TDI stages add charge in the
+ * charge domain and the pixel is read once, so read noise enters once:
+ *   SNR = Ne / √(Ne + σ_read² + N_dark)
  *
  * Assumptions, shown in the interface: nadir view, radiance uniform over the pixel,
  * optics transmission τ and quantum efficiency η band-averaged.
@@ -52,9 +53,9 @@ export function signalElectrons(p: PixelRadiometry): number {
   return (power * p.integrationS / photonEnergy) * p.transmission * p.quantumEfficiency * stages
 }
 
-/** SNR from signal electrons, read noise [e⁻ rms per stage] and dark signal [e⁻] */
-export function snr(signal: number, readNoise = 0, darkElectrons = 0, tdiStages = 1): number {
-  return signal / Math.sqrt(signal + tdiStages * readNoise ** 2 + darkElectrons)
+/** SNR from signal electrons (all TDI stages), read noise [e⁻ rms, read once] and dark signal [e⁻] */
+export function snr(signal: number, readNoise = 0, darkElectrons = 0): number {
+  return signal / Math.sqrt(signal + readNoise ** 2 + darkElectrons)
 }
 
 /**
