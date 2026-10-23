@@ -1,6 +1,6 @@
 # Life cycle and reviews
 
-Document MPS-REV-001 · Issue 1 · 19 October 2026 · Author: Giovanni Marino
+Document MPS-REV-001 · Issue 2 · 23 October 2026 · Author: Giovanni Marino
 
 Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation, 31 July
 2008), scaled to a personal project.
@@ -8,7 +8,7 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 | Phase | Name | ECSS reviews | In this project | Status |
 | --- | --- | --- | --- | --- |
 | 0 | Mission analysis and needs identification | MDR | Project brief, stakeholder needs (TS §3) | Done, 19 Oct 2026 |
-| A | Feasibility | PRR | Published parameters checked; no equivalent web tool found | In progress |
+| A | Feasibility | PRR | Published parameters checked; no equivalent web tool found | Done, 23 Oct 2026 |
 | B | Preliminary definition | SRR, PDR | TS baseline (SRR); architecture and ICD (PDR) | Planned, week 1 |
 | C | Detailed definition | CDR | Formulas and interfaces of every module | Planned, weeks 1–2 |
 | D | Qualification and production | QR, AR, ORR | Implementation, complete VCD (QR), final check before release (AR) | Planned, weeks 2–4 |
@@ -23,7 +23,21 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 - **Exit criteria:** needs stated (TS §3); reference missions chosen; free-resources constraint accepted.
 - **Outcome:** passed. Scope extended beyond four weeks with a phase 2 (shared platform, FTS, SAR).
 
-### PRR · Preliminary requirements review · open
+### PRR · Preliminary requirements review · 23 October 2026
 
 - **Exit criteria:** every reference value in `src/core/presets.ts` traced to an open source;
   first unit tests passing; check that no equivalent web sandbox exists.
+- **Evidence:** radiometry, data and link modules with 15 passing tests; reference values for
+  Sentinel-2 MSI (SNR specification, optics, data rate), MRO X-band and DSN 34 m added with
+  sources; market and tool survey of 19 October 2026 found no web sandbox combining orbit,
+  payload, data and link.
+- **Outcome:** passed with two open items:
+  1. Landsat 8 OLI SNR table not available in an openly readable source: OLI stays a
+     geometry-only preset until a source is found.
+  2. Mars daily quantities use 86 400 s days: to be expressed in sols before CDR.
+- **Change:** SB-02 extended (CR-002).
+
+### SRR · System requirements review · open
+
+- **Exit criteria:** TS issue 1 complete for phase 1 (SB-01 to SB-09) with verification methods;
+  ICD data items for all phase-1 modules; baseline tagged `srr`.

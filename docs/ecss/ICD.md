@@ -26,8 +26,16 @@ Tailored from **ECSS-E-ST-10-24C Rev.1** (Interface management, 15 November 2024
 | GSD | core → UI | m | – | `geometry.ts` |
 | Swath | core → UI | km | – | `geometry.ts` |
 | Equator coverage | core → UI | days | – | `orbit.ts` |
+| Spectral radiance, band centre and width | UI → core | W m⁻² sr⁻¹ µm⁻¹, nm, nm | > 0 | `radiometry.ts` |
+| Aperture, transmission, quantum efficiency, TDI stages | UI → core | m, 0–1, 0–1, integer ≥ 1 | – | `radiometry.ts` |
+| Signal electrons, SNR | core → UI | e⁻, – | – | `radiometry.ts` |
+| Band sampling (GSD, bits), compression ratio, duty cycle | UI → core | m, bit, –, 0–1 | > 0 | `data.ts` |
+| Raw and compressed data rate, daily volume, downlink time | core → UI | bit/s, bit, s | – | `data.ts` |
+| Transmitter power, antenna diameter and efficiency, frequency | UI → core | W, m, 0–1, Hz | > 0 | `link.ts` |
+| Ground gain, system noise temperature, Eb/N0, margin, losses, radio limit | UI → core | dBi, K, dB, dB, dB, bit/s | – | `link.ts` |
+| EIRP, free-space loss, Pr/N0, rate, limiting element | core → UI | dBW, dB, dB-Hz, bit/s, `link` \| `radio` | – | `link.ts` |
 
 ## 3. Open items for PDR
 
 - Valid altitude range per body (atmospheric drag on Earth below about 300 km).
-- Radiometry, data and link data items, added with their modules.
+- Budgets (mass, power, memory) and margin data items, added with their module.

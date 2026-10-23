@@ -48,7 +48,7 @@ specification and the Verification Control Document cannot drift apart.
 | ID | Requirement | Rationale | Verification | Phase |
 | --- | --- | --- | --- | --- |
 | SB-01 | The sandbox shall compute orbital period, ground speed, ground sampling distance, swath, revisit, signal-to-noise ratio, data volume and downlink capacity from declared input parameters. | Core function: a mission and payload trade-off needs these quantities together. | T | 1 |
-| SB-02 | With the Sentinel-2, Landsat 8/9 and HiRISE presets, the computed orbital period, inclination, ground sampling distance and swath shall be within 5% of the published values. | The model is only useful for trade-offs if it reproduces real missions. | T | 1 |
+| SB-02 | With the Sentinel-2, Landsat 8/9 and HiRISE/MRO presets, the computed orbital period, inclination, ground sampling distance, swath and uncompressed data rate shall be within 5% of the published values, and the transmitter EIRP within 1 dB. | The model is only useful for trade-offs if it reproduces real missions. | T | 1 |
 | SB-03 | Each displayed result shall be accompanied by its formula, its assumptions and its range of validity. | Transparency: the user must be able to judge every number. | I | 1 |
 | SB-04 | A compliance matrix of user-defined requirements shall be updated at every change of input, showing value, margin in per cent and status. | Shows how a design change propagates to every requirement. | T, I | 1 |
 | SB-05 | Mass, power and data budgets shall apply the ESA margin policy: unit maturity margins of at least 5%, 10% or 20% (categories A/B, C, D) and a system margin of 20%. | Margin philosophy for science assessment studies, ESA (issue 1.3). | T, R | 1 |

@@ -1,20 +1,20 @@
 # Verification Control Document (VCD)
 
-Document MPS-VCD-001 · generated on 2026-10-19 by `npm run vcd` · do not edit by hand.
+Document MPS-VCD-001 · generated on 2026-10-23 by `npm run vcd` · do not edit by hand.
 
 Tailored from ECSS-E-ST-10-02C Rev.1 (Verification), Annex B. Verification methods: T test, A analysis,
 R review of design, I inspection. Source of requirements: [Technical Requirements Specification](TS.md).
 
-Automated tests: 7 passed out of 7.
+Automated tests: 15 passed out of 15.
 
 | Req. | Title | Methods | Verification evidence (automated tests) | Status |
 | --- | --- | --- | --- | --- |
-| SB-01 | First-order performance outputs | T | ✔ returns finite, physically ordered values for Earth and Mars<br>✔ Sentinel-2 equatorial coverage close to the published revisit (1 and 2 satellites)<br>✔ Landsat 8 coverage estimate is below the 16-day repeat cycle (different quantities, documented) | Partially verified |
-| SB-02 | Agreement with published missions | T | ✔ Sentinel-2 period within 5% of the published 100.6 min<br>✔ sun-synchronous inclination of Sentinel-2 and Landsat 8 within 5% of published<br>✔ HiRISE GSD and swath from published optics within 5% | Partially verified |
+| SB-01 | First-order performance outputs | T | ✔ returns finite, physically ordered values for Earth and Mars<br>✔ Sentinel-2 equatorial coverage close to the published revisit (1 and 2 satellites)<br>✔ Landsat 8 coverage estimate is below the 16-day repeat cycle (different quantities, documented)<br>✔ Sentinel-2 10 m bands: shot-noise SNR at Lref within a factor 2 of the specification<br>✔ read noise and dark signal lower the SNR; TDI raises it<br>✔ daily volume and downlink time follow from rate and duty cycle | Partially verified |
+| SB-02 | Agreement with published missions | T | ✔ Sentinel-2 period within 5% of the published 100.6 min<br>✔ sun-synchronous inclination of Sentinel-2 and Landsat 8 within 5% of published<br>✔ HiRISE GSD and swath from published optics within 5%<br>✔ Sentinel-2 uncompressed data rate within 5% of the published 1.3 Gbit/s<br>✔ MRO X-band EIRP within 1 dB of the published 95.6 dBm | Partially verified |
 | SB-03 | Visible formulas and assumptions | I | – | I open |
 | SB-04 | Live requirement compliance matrix | T, I | – | Open |
 | SB-05 | Budgets with ESA margins | T, R | – | Open |
-| SB-06 | Celestial body switch | T | ✔ Mars at 300 km: line time compatible with the HiRISE minimum of 76 µs | Partially verified |
+| SB-06 | Celestial body switch | T | ✔ Mars at 300 km: line time compatible with the HiRISE minimum of 76 µs<br>✔ the same scene around Mars has 43% of the Earth radiance (586.2 / 1361 W/m²)<br>✔ Mars at maximum distance: rate within a factor 2 of the 0.6 Mbps reported for MRO<br>✔ Mars at minimum distance: the radio, not the link, limits the rate | Partially verified |
 | SB-07 | Responsiveness without a server | T | – | Open |
 | SB-08 | Sharing and export | I | – | I open |
 | SB-09 | Payload families | T, I | – | Open |
