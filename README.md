@@ -3,7 +3,7 @@
 First-order mission and payload trade-offs in the browser, from Earth observation to Mars,
 developed and documented with ECSS systems-engineering practices.
 
-> Status: detailed design (CDR passed, 24 October 2026); all phase-1 requirements verified. Interactive interface in English
+> Status: qualified (QR passed, 24 October 2026); all phase-1 requirements verified and validated against published missions. Next: acceptance review and release v1.0.0. Interactive interface in English
 > and Italian with Sentinel-2, EnMAP and HiRISE/MRO presets; see the [reviews](docs/ecss/REVIEWS.md)
 > and the [Verification Control Document](docs/ecss/VCD.md).
 

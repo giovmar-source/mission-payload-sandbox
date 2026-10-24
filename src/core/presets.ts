@@ -38,6 +38,10 @@ const ENMAP = 'https://www.enmap.org/mission/'
 const HIRISE_TDI = 'https://pds.nasa.gov/datastandards/documents/dd/current/PDS4_PDS_DD_1M00/webhelp/all/ch47s198.html'
 const HIRISE_COSPAR = 'https://meetings.copernicus.org/www.cosis.net/abstracts/COSPAR2006/01096/COSPAR2006-A-01096.pdf'
 const ENMAP_EOPORTAL = 'https://www.eoportal.org/satellite-missions/enmap'
+const ENMAP_SPECS = 'https://www.enmap.org/data/doc/EnMAP_Specs.pdf'
+const OLI_DESIGN = 'https://doi.org/10.3390/rs61110286'
+const OLI_ONORBIT = 'https://earth.esa.int/eogateway/documents/20142/4139742/3.07_VH-RODA%202022%20-%20L8-9%20OLI%20radiometric%20performances%20-%20RLevy.pdf'
+const S2A_E0 = 'https://explorer.nci.dea.ga.gov.au/dataset/139d6937-bec9-51ac-9b55-e5928a14f5cf'
 
 /** Sentinel-2 MSI bands: centre and width [nm], reference radiance Lref [W m⁻² sr⁻¹ µm⁻¹],
  *  required SNR at Lref, GSD [m]. Source: ESA, Sentinel-2 MSI mission performance. */
@@ -56,6 +60,27 @@ export const S2_BANDS = [
   { band: 'B11', centreNm: 1610, widthNm: 90, lref: 4, snrRequired: 100, gsdM: 20 },
   { band: 'B12', centreNm: 2190, widthNm: 180, lref: 1.5, snrRequired: 100, gsdM: 20 },
 ] as const
+
+/**
+ * Landsat 8 OLI radiometric reference (QR). Required SNR: Knight and Kvaran 2014, Table 1(b)
+ * (Remote Sensing 6, 10286). Typical radiance Ltypical [W m⁻² sr⁻¹ µm⁻¹] and median on-orbit
+ * SNR at Ltypical: Levy, «L8/9 OLI radiometric performances», ESA VH-RODA workshop 2022.
+ * The OLI aperture and detector quantum efficiency are not in these open sources, so the
+ * sandbox cannot predict this SNR forward: the table checks the compliance logic instead.
+ */
+export const OLI_SNR = [
+  { band: 'Coastal/Aerosol', centreNm: 443, lTypical: 40, snrRequired: 130, snrOnOrbit: 237 },
+  { band: 'Blue', centreNm: 482, lTypical: 40, snrRequired: 130, snrOnOrbit: 370 },
+  { band: 'Green', centreNm: 562, lTypical: 30, snrRequired: 100, snrOnOrbit: 307 },
+  { band: 'Red', centreNm: 655, lTypical: 22, snrRequired: 90, snrOnOrbit: 229 },
+  { band: 'NIR', centreNm: 865, lTypical: 14, snrRequired: 90, snrOnOrbit: 203 },
+  { band: 'SWIR1', centreNm: 1610, lTypical: 4, snrRequired: 100, snrOnOrbit: 268 },
+  { band: 'SWIR2', centreNm: 2200, lTypical: 1.7, snrRequired: 100, snrOnOrbit: 327 },
+  { band: 'Pan', centreNm: 590, lTypical: 23, snrRequired: 80, snrOnOrbit: 148 },
+  { band: 'Cirrus', centreNm: 1375, lTypical: 6, snrRequired: 50, snrOnOrbit: 159 },
+] as const
+
+export const OLI_SNR_SOURCES = { required: OLI_DESIGN, onOrbit: OLI_ONORBIT }
 
 export const PRESETS: Preset[] = [
   {
@@ -128,14 +153,22 @@ export const PRESETS: Preset[] = [
       swirMaxNm: { value: 2450, unit: 'nm', source: ENMAP },
       swirSamplingNm: { value: 10, unit: 'nm', source: ENMAP_EOPORTAL },
       bands: { value: 228, unit: '-', source: ENMAP_EOPORTAL },
-      snrVnir495: { value: 500, unit: '-', source: ENMAP_EOPORTAL },
-      snrSwir2200: { value: 175, unit: '-', source: ENMAP_EOPORTAL },
+      snrVnir495: { value: 500, unit: '- (minimum)', source: ENMAP_SPECS },
+      snrSwir2200: { value: 150, unit: '- (minimum)', source: ENMAP_SPECS },
+      // reference conditions of the SNR specification
+      snrReferenceAlbedo: { value: 0.3, unit: '-', source: ENMAP_SPECS },
+      snrReferenceSunZenith: { value: 30, unit: 'deg', source: ENMAP_SPECS },
+      // band-averaged solar irradiance used by the Sentinel-2A processor (B2 490 nm, B12 2190 nm)
+      solarIrradianceB2: { value: 1959.66, unit: 'W m⁻² µm⁻¹', source: S2A_E0 },
+      solarIrradianceB12: { value: 85.25, unit: 'W m⁻² µm⁻¹', source: S2A_E0 },
       quantisation: { value: 14, unit: 'bit', source: ENMAP_EOPORTAL },
       downlinkRate: { value: 320, unit: 'Mbit/s', source: ENMAP_EOPORTAL },
       onboardMemory: { value: 512, unit: 'Gbit', source: ENMAP_EOPORTAL },
     },
     derived: {
       aperture: { value: 0.174, unit: 'm', source: ENMAP_EOPORTAL, from: 'focal length 0.522 m / f/3' },
+      referenceRadiance495: { value: 162.1, unit: 'W m⁻² sr⁻¹ µm⁻¹', source: S2A_E0, from: '0.3 × 1959.66 × cos 30° / π, no atmosphere' },
+      referenceRadiance2200: { value: 7.05, unit: 'W m⁻² sr⁻¹ µm⁻¹', source: S2A_E0, from: '0.3 × 85.25 × cos 30° / π, no atmosphere' },
     },
   },
   {

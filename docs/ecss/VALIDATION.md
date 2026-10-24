@@ -1,6 +1,6 @@
 # Validation note
 
-Document MPS-VAL-001 · Issue 4 · 24 October 2026 · Author: Giovanni Marino
+Document MPS-VAL-001 · Issue 5 (QR) · 24 October 2026 · Author: Giovanni Marino
 
 The model is compared with published values of real missions. Only values stated on the
 cited pages are used; values derived from them are marked as derived.
@@ -75,9 +75,9 @@ is why MRO's real rates change by about 4 times while free-space loss changes by
   model, not a fault of it. The test accepts 10%.
 - **Data rate.** The 2 × 840 Mbit/s quoted for the instrument-to-memory interface is a link
   capacity, not the generated data rate, so it is not used for validation.
-- **SNR.** The specification (500 at 495 nm, 175 at 2200 nm; one section of the same source
-  gives 150) is set at 30% reflectance and 30° solar zenith angle. Checking it needs the solar
-  spectral irradiance at those wavelengths from a citable source: open item.
+- **SNR.** See «Signal-to-noise ratio, EnMAP» below. The official specification sheet gives
+  minimums of 500 at 495 nm and 150 at 2200 nm; eoPortal quotes 175 in one section, so the
+  official value is used (CR-007).
 
 ## HiRISE sampling and diffraction
 
@@ -86,7 +86,54 @@ At 300 km and 700 nm the diffraction spot of the 0.5 m aperture projects to
 finer than its optics resolve: the sandbox flags this as a validity warning, because the
 sharpness of the image is then set by the optics and not by the pixel size.
 
+## Signal-to-noise ratio, EnMAP (closed at QR)
+
+Specification: SNR above 500 at 495 nm and above 150 at 2200 nm, for 30% surface albedo and
+30° Sun zenith angle ([EnMAP specifications](https://www.enmap.org/data/doc/EnMAP_Specs.pdf)).
+The sheet gives no radiance value, so the sandbox derives it:
+L = ρ · E₀ · cos θ / π, with the band-averaged solar irradiance E₀ that the Sentinel-2A
+processor uses, 1959.66 W m⁻² µm⁻¹ at 490 nm and 85.25 W m⁻² µm⁻¹ at 2190 nm
+([Sentinel-2A L1C product metadata](https://explorer.nci.dea.ga.gov.au/dataset/139d6937-bec9-51ac-9b55-e5928a14f5cf)).
+**Derived:** L = 162.1 (495 nm) and 7.05 (2200 nm) W m⁻² sr⁻¹ µm⁻¹. **Assumed:** no
+atmosphere, optics transmission 0.8, quantum efficiency 0.6, read noise 50 e⁻ (as for
+Sentinel-2).
+
+| Wavelength | Sampling | Specification (minimum) | Model SNR | Ratio |
+| --- | --- | --- | --- | --- |
+| 495 nm | 6.5 nm | 500 | 525 | 1.05 |
+| 2200 nm | 10 nm | 150 | 283 | 1.89 |
+
+The VNIR value agrees within 5%. In the SWIR the model is higher: the specification is a
+minimum, the atmosphere is left out, and the generic transmission and efficiency are not the
+values of a grating spectrometer with an HgCdTe detector. The test accepts a factor of 2, as
+for Sentinel-2: an order-of-magnitude check, not the instrument's real performance.
+
+## Signal-to-noise ratio, Landsat 8 OLI (closed at QR, as a data check)
+
+Required SNR per band from Knight and Kvaran 2014, Table 1(b)
+([Remote Sensing 6, 10286](https://doi.org/10.3390/rs61110286)); typical radiance and
+median on-orbit SNR from Levy 2022
+([ESA VH-RODA workshop](https://earth.esa.int/eogateway/documents/20142/4139742/3.07_VH-RODA%202022%20-%20L8-9%20OLI%20radiometric%20performances%20-%20RLevy.pdf)).
+
+| Band | Ltypical | Required | On-orbit | Margin |
+| --- | --- | --- | --- | --- |
+| Coastal/Aerosol | 40 | 130 | 237 | +82% |
+| Blue | 40 | 130 | 370 | +185% |
+| Green | 30 | 100 | 307 | +207% |
+| Red | 22 | 90 | 229 | +154% |
+| NIR | 14 | 90 | 203 | +126% |
+| SWIR1 | 4 | 100 | 268 | +168% |
+| SWIR2 | 1.7 | 100 | 327 | +227% |
+| Pan | 23 | 80 | 148 | +85% |
+| Cirrus | 6 | 50 | 159 | +218% |
+
+The OLI aperture and detector efficiency are not given in these open sources (the design
+paper gives the 886 mm focal length and the 90–3600 µs integration range, not the pupil), so a
+forward SNR prediction would rest on invented numbers and is not made. The table is used to
+check the compliance logic on real data: every band compliant, smallest margin
+Coastal/Aerosol. OLI remains a geometry preset.
+
 ## Open items
 
-- Landsat 8 OLI SNR: the published table is not in an openly readable source.
-- EnMAP SNR: needs a citable solar spectral irradiance reference.
+None for phase 1. Possible improvement: an atmospheric transmission term for the reference
+radiance, if a citable open table is found.

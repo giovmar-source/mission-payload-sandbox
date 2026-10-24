@@ -1,6 +1,6 @@
 # Life cycle and reviews
 
-Document MPS-REV-001 · Issue 4 · 24 October 2026 · Author: Giovanni Marino
+Document MPS-REV-001 · Issue 5 · 24 October 2026 · Author: Giovanni Marino
 
 Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation, 31 July
 2008), scaled to a personal project.
@@ -11,7 +11,7 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 | A | Feasibility | PRR | Published parameters checked; no equivalent web tool found | Done, 23 Oct 2026 |
 | B | Preliminary definition | SRR, PDR | TS baseline (SRR); architecture and ICD (PDR) | Done, 23 Oct 2026 |
 | C | Detailed definition | CDR | Formulas and interfaces of every module | Done, 24 Oct 2026 |
-| D | Qualification and production | QR, AR, ORR | Implementation, complete VCD (QR), final check before release (AR) | Planned, weeks 2–4 |
+| D | Qualification and production | QR, AR, ORR | Implementation, complete VCD (QR), final check before release (AR) | QR done, 24 Oct 2026; AR next |
 | E | Operations and utilisation | FRR, LRR, CRR, ELR | Public release, issue handling, later versions | After release |
 | F | Disposal | MCR | Documented archiving | End of life |
 
@@ -91,3 +91,23 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
   3. Last axis label of the charts clipped: fixed.
 - **Outcome:** passed. Next: QR (complete VCD, validation note) and AR before the public
   release `v1.0.0`. Open items: OLI and EnMAP SNR sources.
+
+### QR · Qualification review · 24 October 2026
+
+- **Exit criteria:** VCD complete for phase 1; no open validation item; every reference value
+  with an open source; no known vulnerability in the dependencies; baseline tagged `qr`.
+- **Evidence:** 51 tests passing, VCD SB-01 to SB-09 closed; validation note issue 5;
+  `npm audit`: 0 vulnerabilities.
+- **Closed items:**
+  1. EnMAP SNR: reference radiance derived from 30% albedo, 30° Sun zenith and the
+     Sentinel-2A solar irradiance; model 525 against 500 at 495 nm, 283 against 150 at 2200 nm.
+  2. Landsat 8 OLI SNR: published requirement and on-orbit tables found; used to check the
+     compliance logic. A forward prediction is not made because the aperture is not in an
+     open source.
+- **Findings:**
+  1. eoPortal and the EnMAP specification sheet disagree on the SWIR SNR (175 and 150): the
+     official sheet is used (CR-007).
+  2. A new test expected the smallest OLI margin in the Pan band; the published data put it in
+     Coastal/Aerosol (+82% against +85%). The expectation was wrong: corrected.
+- **Outcome:** passed. Next: AR (fresh install from the repository, public site check, README
+  and licence) and release `v1.0.0`.

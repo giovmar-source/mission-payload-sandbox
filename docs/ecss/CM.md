@@ -20,7 +20,8 @@ Tailored from **ECSS-M-ST-40C Rev.1** (Configuration and information management,
 | Functional | TS issue 1, ICD issue 1 | SRR, 23 Oct 2026 | `srr` |
 | Design | TS + ICD issue 2 + interface architecture | PDR, 23 Oct 2026 | `pdr` |
 | Detailed design | Module formulas and interfaces complete, ICD issue 3 | CDR, 24 Oct 2026 | `cdr` |
-| Product | Verified version 1 | QR / AR | `v1.0.0` |
+| Qualified | Validation complete, VCD complete, validation note issue 5 | QR, 24 Oct 2026 | `qr` |
+| Product | Verified version 1 | AR | `v1.0.0` |
 
 ## Change records
 
@@ -32,3 +33,4 @@ Tailored from **ECSS-M-ST-40C Rev.1** (Configuration and information management,
 | CR-004 | 23 Oct 2026 | EnMAP added as hyperspectral reference preset; SB-02 now names EnMAP | SB-09 needs a validated hyperspectral reference | Requirement register, presets, ICD, validation note; functional baseline `srr` superseded at PDR | Closed |
 | CR-005 | 23 Oct 2026 | Read noise counted once in CCD TDI (was once per stage) | Found during PDR browser check: HiRISE SNR of 8 was not credible; CCD TDI adds charge in the charge domain and reads once | `radiometry.ts`, `design.ts`; Sentinel-2 SNR validation unchanged (shot noise only); tests updated | Closed |
 | CR-006 | 23 Oct 2026 | HiRISE preset: TDI 128 (published options 8, 32, 64, 128), read noise < 50 e⁻, duty cycle derived from ~18 Tbit over the 2-year primary science phase | Replaced two unsupported assumptions (TDI 1, duty cycle 1%) with published or derived values | `presets.ts`, `design.ts`; new test | Closed |
+| CR-007 | 24 Oct 2026 | EnMAP SWIR SNR specification 175 → 150 (official specification sheet); reference conditions, solar irradiance and Landsat 8 OLI SNR table added with sources | QR: close the two radiometric open items with citable values | `presets.ts`, `radiometry.ts` (`reflectanceToRadiance`), new tests; interface results unchanged | Closed |

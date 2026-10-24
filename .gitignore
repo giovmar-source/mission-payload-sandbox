@@ -5,3 +5,8 @@ dist/
 .vite/
 coverage/
 reports/test-results.json
+
+# output of a plain `tsc -b`
+src/**/*.js
+vite.config.js
+*.tsbuildinfo

@@ -18,7 +18,7 @@ Ultimo aggiornamento: **24 ottobre 2026**
 | 19 ott | Licenza MIT; documenti in inglese, dialogo in italiano |
 
 ## 3. Stato
-- MDR, PRR, SRR, PDR e CDR chiuse (baseline `srr`, `pdr`, `cdr`). Requisiti SB-01…SB-09 chiusi. Prossime: QR e AR, poi `v1.0.0`.
+- MDR, PRR, SRR, PDR, CDR e QR chiuse (baseline `srr`, `pdr`, `cdr`, `qr`). Requisiti SB-01…SB-09 chiusi, nessun punto di validazione aperto. Prossima: AR, poi `v1.0.0`.
 - Fatto: nucleo orbita (Terra, Marte), geometria (GSD, swath, tempo di riga), preset con fonti,
   moduli di radiometria/SNR, dati e collegamento (23 ott), 15 test, VCD generato dai test, TS, VP, ICD (bozza), revisioni, configurazione, nota di validazione,
   pagina di anteprima.
@@ -32,7 +32,8 @@ Ultimo aggiornamento: **24 ottobre 2026**
 - [x] Interfaccia (pannelli, matrice di conformità, formule, IT/EN, link, JSON): PDR chiusa
 - [ ] Pubblicazione su Cloudflare Pages
 - [x] CDR: riepilogo PDF (SB-08), avvisi di validità, curve di trade-off
-- [ ] QR e AR, release `v1.0.0`, post LinkedIn
+- [x] QR: SNR di EnMAP e di Landsat 8 OLI con fonti aperte
+- [ ] AR, release `v1.0.0`, post LinkedIn
 - [ ] Fonte citabile dello spettro solare (per l'SNR di EnMAP)
 - [ ] Settimana 2: interfaccia completa, matrice di conformità, IT/EN
 - [x] Marte: grandezze giornaliere in sol (CR-003)
@@ -46,3 +47,4 @@ Ultimo aggiornamento: **24 ottobre 2026**
 | 23 ott 2026 (sera, 2) | Spettrometro iperspettrale (SB-09) con preset EnMAP: GSD 30,02 m, swath 29,87 km, 244 canali contro 228 (+7%); 31 test |
 | 23 ott 2026 (notte) | Interfaccia completa e PDR chiusa: motore design/evaluate, link condivisibile, IT/EN, valori ricavati distinti dalle ipotesi; CR-005 (rumore TDI) e CR-006 (HiRISE: TDI 128, frazione di acquisizione da 18 Tbit); 42 test |
 | 24 ott 2026 | CDR chiusa: avvisi di validità (resistenza atmosferica, diffrazione, striscia ampia), curve di trade-off con limiti, riepilogo PDF; SB-01…SB-09 chiusi; 48 test |
+| 24 ott 2026 | QR chiusa: SNR EnMAP (525 contro 500 a 495 nm), tabella SNR OLI con fonti, CR-007; 51 test |

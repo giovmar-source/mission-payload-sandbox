@@ -65,3 +65,13 @@ export function snr(signal: number, readNoise = 0, darkElectrons = 0): number {
 export function radianceAtBody(earthRadiance: number, body: Body): number {
   return earthRadiance * (body.solarIrradiance / BODIES.earth.solarIrradiance)
 }
+
+/**
+ * Radiance of a Lambertian surface of reflectance ρ lit by the Sun at zenith angle θ, without
+ * the atmosphere:  L = ρ · E₀ · cos θ / (π d²),  E₀ solar spectral irradiance at 1 AU
+ * [W m⁻² µm⁻¹], d Sun distance [AU]. The atmosphere removes part of the light and adds path
+ * radiance; at 30° zenith the net effect is of the order of ten percent in the visible.
+ */
+export function reflectanceToRadiance(reflectance: number, solarIrradiance: number, sunZenithDeg: number, distanceAu = 1): number {
+  return (reflectance * solarIrradiance * Math.cos((sunZenithDeg * Math.PI) / 180)) / (Math.PI * distanceAu ** 2)
+}
