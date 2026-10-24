@@ -84,3 +84,34 @@ td.limit input { width: 84px; text-align: right; font-family: var(--mono); font-
 .foot { margin-top: 20px; color: var(--mute); font-size: 12.5px; }
 .foot p { margin: 4px 0; }
 .foot a { color: var(--accent); }
+
+.warnings { border-color: var(--warn); background: var(--warn-bg); }
+.warnings ul { margin: 0; padding-left: 18px; }
+.warnings li { margin: 3px 0; }
+.trades { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.trade { margin: 0; }
+.trade figcaption { font-size: 12.5px; color: var(--soft); font-weight: 600; margin-bottom: 2px; }
+.trade svg { width: 100%; height: auto; display: block; cursor: crosshair; }
+.trade .grid { stroke: var(--line); stroke-width: 1; }
+.trade .tick { fill: var(--mute); font-size: 10.5px; font-family: var(--mono); }
+.trade .curve { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.trade .limit { stroke: var(--bad); stroke-width: 1.25; stroke-dasharray: 5 4; }
+.trade .now { fill: var(--accent); stroke: var(--panel); stroke-width: 2; }
+.trade .cross { stroke: var(--mute); stroke-width: 1; stroke-dasharray: 2 3; }
+.trade .hover-dot { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
+.trade-readout { margin: 2px 0 0; font-family: var(--mono); font-size: 12px; color: var(--soft); }
+
+.print-summary { display: none; }
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { background: #fff; color: #000; font-size: 10.5pt; }
+  .app > *:not(.print-summary) { display: none !important; }
+  .print-summary { display: block; }
+  .print-summary h1 { font-size: 15pt; margin: 0 0 4px; }
+  .print-summary h2 { font-size: 11.5pt; margin: 12px 0 4px; }
+  .print-summary table { width: 100%; border-collapse: collapse; }
+  .print-summary td, .print-summary th { border-bottom: 1px solid #bbb; padding: 3px 6px 3px 0; text-align: left; font-size: 9.5pt; }
+  .print-summary ul { margin: 0; padding-left: 16px; font-size: 9pt; }
+  .print-summary ul.sources { word-break: break-all; }
+  .print-summary .small { font-size: 8.5pt; color: #444; margin-top: 12px; }
+}

@@ -1,6 +1,6 @@
 # Validation note
 
-Document MPS-VAL-001 · Issue 3 · 23 October 2026 · Author: Giovanni Marino
+Document MPS-VAL-001 · Issue 4 · 24 October 2026 · Author: Giovanni Marino
 
 The model is compared with published values of real missions. Only values stated on the
 cited pages are used; values derived from them are marked as derived.
@@ -78,6 +78,13 @@ is why MRO's real rates change by about 4 times while free-space loss changes by
 - **SNR.** The specification (500 at 495 nm, 175 at 2200 nm; one section of the same source
   gives 150) is set at 30% reflectance and 30° solar zenith angle. Checking it needs the solar
   spectral irradiance at those wavelengths from a citable source: open item.
+
+## HiRISE sampling and diffraction
+
+At 300 km and 700 nm the diffraction spot of the 0.5 m aperture projects to
+1.22 λ h / D ≈ 0.51 m on the ground, larger than the 0.30 m pixel. HiRISE therefore samples
+finer than its optics resolve: the sandbox flags this as a validity warning, because the
+sharpness of the image is then set by the optics and not by the pixel size.
 
 ## Open items
 

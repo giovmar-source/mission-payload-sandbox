@@ -4,6 +4,10 @@ import { type Maturity } from '../core/budgets'
 import { designFromPreset, evaluate, newUnit, QUANTITIES, UI_PRESETS, type Design } from '../core/design'
 import { preset } from '../core/presets'
 import { decodeDesign, designToJson, encodeDesign } from '../core/share'
+import { altitudeSweep, sweepRange } from '../core/sweep'
+import { validityWarnings, type ValidityWarning } from '../core/validity'
+import { TradeChart } from './charts'
+import { PrintSummary } from './summary'
 import { fmt, setLang, t, useLang } from './i18n'
 import { NumberField, Panel, RangeField, Result } from './parts'
 
@@ -23,6 +27,9 @@ export default function App() {
   const [design, setDesign] = useState<Design>(initialDesign)
   const [copied, setCopied] = useState(false)
   const r = useMemo(() => evaluate(design), [design])
+  const warnings = useMemo(() => validityWarnings(design, r), [design, r])
+  const sweep = useMemo(() => altitudeSweep(design, ...sweepRange(design.body), 40), [design])
+  const limitOf = (q: string) => design.requirements.find((x) => x.quantity === q)?.limit
   const body = BODIES[design.body]
   const sol = design.body === 'mars'
   const isAssumed = (path: string): 'assumed' | 'derived' | null =>
@@ -43,6 +50,15 @@ export default function App() {
     const a = document.createElement('a'); a.href = url; a.download = 'mission-design.json'; a.click(); URL.revokeObjectURL(url)
   }
 
+  const warningText = (w: ValidityWarning): string => {
+    switch (w.code) {
+      case 'drag': return t('Below 300 km on Earth, atmospheric drag shortens the orbit lifetime; the model ignores drag.')
+      case 'no-sso': return t('No sun-synchronous orbit exists at this altitude.')
+      case 'diffraction': return `${t('The pixel is smaller than the diffraction spot')} (${fmt(w.value, 2)} m): ${t('image sharpness is limited by the optics, not by the detector.')}`
+      case 'wide-swath': return `${t('Wide field of view: the flat-surface swath is underestimated by about')} ${fmt(w.value * 100, 1)}%.`
+    }
+  }
+
   const p = design.payload
   const l = design.link
   const perDay = sol ? t('sols') : t('days')
@@ -61,6 +77,7 @@ export default function App() {
           </select>
           <button onClick={share}>{copied ? t('Link copied') : t('Share link')}</button>
           <button onClick={exportJson}>{t('Export JSON')}</button>
+          <button onClick={() => window.print()}>{t('PDF summary')}</button>
           <div className="lang" role="group" aria-label="Language">
             <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
             <button className={lang === 'it' ? 'on' : ''} onClick={() => setLang('it')}>IT</button>
@@ -184,6 +201,23 @@ export default function App() {
             <p className="note">{t('Example requirements: edit the limits. Marginal = margin below 10% (a sandbox convention, not an ESA rule).')}</p>
           </div>
 
+          {warnings.length > 0 && (
+            <div className="card warnings" role="status">
+              <h2>{t('Model validity')}</h2>
+              <ul>{warnings.map((w) => <li key={w.code}>{warningText(w)}</li>)}</ul>
+            </div>
+          )}
+
+          <div className="card">
+            <h2>{t('Trade-offs against altitude')}</h2>
+            <div className="trades">
+              <TradeChart title={t('Ground sampling distance')} unit="m" rows={sweep} pick={(x) => x.gsd} altitude={design.altitudeKm} limit={limitOf('gsd')} digits={design.body === 'mars' ? 2 : 1} />
+              <TradeChart title={t('Equator coverage')} unit={perDay} rows={sweep} pick={(x) => x.revisit} altitude={design.altitudeKm} limit={limitOf('revisit')} />
+              <TradeChart title={t('Downlink / data generated')} unit="" rows={sweep} pick={(x) => x.downlinkRatio} altitude={design.altitudeKm} limit={limitOf('downlinkRatio')} digits={2} />
+            </div>
+            <p className="note">{t('A higher orbit widens the swath and speeds up coverage, but coarsens the resolution: the dot is the current design, the dashed line your requirement.')}</p>
+          </div>
+
           <div className="card">
             <h2>{t('Orbit and geometry')}</h2>
             <Result label={t('Orbital period')} value={fmt(r.periodMin)} unit="min" formula="T = 2π √(a³ / μ),  a = R + h"
@@ -260,6 +294,8 @@ export default function App() {
           </div>
         </section>
       </main>
+
+      <PrintSummary d={design} r={r} warnings={warnings} warningText={warningText} labels={QUANTITY_LABELS} />
 
       <footer className="foot">
         <p>{t('First-order model for phase 0/A trade-offs, not for flight design.')} {t('Built with ECSS practices: requirements, ICD, verification control document and validation are in the repository.')}</p>

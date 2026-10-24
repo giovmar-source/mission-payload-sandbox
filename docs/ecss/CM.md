@@ -19,7 +19,7 @@ Tailored from **ECSS-M-ST-40C Rev.1** (Configuration and information management,
 | --- | --- | --- | --- |
 | Functional | TS issue 1, ICD issue 1 | SRR, 23 Oct 2026 | `srr` |
 | Design | TS + ICD issue 2 + interface architecture | PDR, 23 Oct 2026 | `pdr` |
-| Detailed design | Module formulas and interfaces complete | CDR | `cdr` |
+| Detailed design | Module formulas and interfaces complete, ICD issue 3 | CDR, 24 Oct 2026 | `cdr` |
 | Product | Verified version 1 | QR / AR | `v1.0.0` |
 
 ## Change records

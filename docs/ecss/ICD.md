@@ -1,6 +1,6 @@
 # Interface Control Document (ICD): physics core ↔ user interface
 
-Document MPS-ICD-001 · Issue 2 (PDR baseline) · 23 October 2026 · Author: Giovanni Marino
+Document MPS-ICD-001 · Issue 3 (CDR baseline) · 24 October 2026 · Author: Giovanni Marino
 
 Tailored from **ECSS-E-ST-10-24C Rev.1** (Interface management, 15 November 2024), Annex B.
 
@@ -56,10 +56,12 @@ marked in the interface.
 | Design (all inputs), assumptions and derived field lists | UI → core | `Design` | version 1 | `design.ts` |
 | Results (all outputs) | core → UI | `Results` | – | `design.ts` |
 | Share code | UI ↔ URL | base64url of the design JSON | invalid codes rejected | `share.ts` |
+| Validity warnings: code, triggering value | core → UI | `drag` \| `no-sso` \| `diffraction` \| `wide-swath`, number | – | `validity.ts` |
+| Altitude sweep: altitude, GSD, coverage, SNR, downlink ratio, storage fill | core → UI | km, m, days, –, –, – | Earth 300–1200 km, Mars 200–1000 km | `sweep.ts` |
 | Compliance rows: value, margin, status | core → UI | –, –, `compliant` \| `marginal` \| `non-compliant` | – | `compliance.ts` |
 
-## 4. Open items for CDR
+## 4. Closed at CDR
 
-- Valid altitude range per body (atmospheric drag on Earth below about 300 km): the interface
-  allows 200–1500 km and does not warn yet.
-- PDF summary export (SB-08).
+- Altitude validity: warning below 300 km on Earth (`validity.ts`).
+- PDF summary: printable summary rendered only for print (`src/ui/summary.tsx`); the browser's
+  «Save as PDF» produces it without a server or a PDF library.

@@ -1,6 +1,6 @@
 # Life cycle and reviews
 
-Document MPS-REV-001 · Issue 3 · 23 October 2026 · Author: Giovanni Marino
+Document MPS-REV-001 · Issue 4 · 24 October 2026 · Author: Giovanni Marino
 
 Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation, 31 July
 2008), scaled to a personal project.
@@ -10,7 +10,7 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
 | 0 | Mission analysis and needs identification | MDR | Project brief, stakeholder needs (TS §3) | Done, 19 Oct 2026 |
 | A | Feasibility | PRR | Published parameters checked; no equivalent web tool found | Done, 23 Oct 2026 |
 | B | Preliminary definition | SRR, PDR | TS baseline (SRR); architecture and ICD (PDR) | Done, 23 Oct 2026 |
-| C | Detailed definition | CDR | Formulas and interfaces of every module | Planned, weeks 1–2 |
+| C | Detailed definition | CDR | Formulas and interfaces of every module | Done, 24 Oct 2026 |
 | D | Qualification and production | QR, AR, ORR | Implementation, complete VCD (QR), final check before release (AR) | Planned, weeks 2–4 |
 | E | Operations and utilisation | FRR, LRR, CRR, ELR | Public release, issue handling, later versions | After release |
 | F | Disposal | MCR | Documented archiving | End of life |
@@ -70,3 +70,24 @@ Phases and reviews follow **ECSS-M-ST-10C** (Project planning and implementation
   TDI and derived duty cycle); derived values shown as assumptions → new «derived» marking.
 - **Outcome:** passed. Open items for CDR: PDF summary (SB-08), altitude validity warning,
   OLI and EnMAP SNR sources.
+
+### CDR · Critical design review · 24 October 2026
+
+- **Exit criteria:** every phase-1 requirement implemented and verified; open PDR items closed
+  (PDF summary, altitude validity); ICD issue 3; baseline tagged `cdr`.
+- **Evidence:** validity warnings (drag below 300 km on Earth, no sun-synchronous orbit,
+  diffraction, wide swath), trade-off curves against altitude with requirement limits,
+  printable PDF summary with compliance, results, assumptions, derived values and sources;
+  48 tests passing; browser check of hover read-out, warnings and print output; VCD: SB-01 to
+  SB-09 closed, SB-10 open for phase 2.
+- **Inspection (I):** SB-08 share link, JSON export, PDF summary, English and Italian. **Closed.**
+- **Findings:**
+  1. The diffraction check flags HiRISE: 0.30 m pixels against a 0.51 m Airy radius at 700 nm.
+     This is a real property of the instrument (fine sampling), so the warning stays and is
+     explained in the validation note.
+  2. A test expected the spherical-swath correction of Sentinel-2 to be +0.6%; a careful
+     recomputation gives +0.22%, the value the code returns. The test expectation was
+     wrong, not the model: corrected.
+  3. Last axis label of the charts clipped: fixed.
+- **Outcome:** passed. Next: QR (complete VCD, validation note) and AR before the public
+  release `v1.0.0`. Open items: OLI and EnMAP SNR sources.

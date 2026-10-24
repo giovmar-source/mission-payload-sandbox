@@ -19,7 +19,7 @@
         "T"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true
     },
     {
       "id": "SB-02",
@@ -31,7 +31,7 @@
         "T"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true
     },
     {
       "id": "SB-03",
@@ -90,7 +90,7 @@
         "T"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true
     },
     {
       "id": "SB-07",
@@ -114,7 +114,10 @@
         "I"
       ],
       "phase": 1,
-      "complete": false
+      "complete": true,
+      "closedBy": {
+        "I": "CDR, 24 Oct 2026 (docs/ecss/REVIEWS.md)"
+      }
     },
     {
       "id": "SB-09",
